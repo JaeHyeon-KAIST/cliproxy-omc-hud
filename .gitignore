@@ -1,0 +1,5 @@
+hud-config.json
+node_modules/
+.omc/
+.claude/
+.DS_Store

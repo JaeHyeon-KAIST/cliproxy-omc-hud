@@ -1,0 +1,12 @@
+{
+  "order": ["account1", "account2", "account3"],
+  "hidden": [],
+  "labels": {
+    "account1": "A1",
+    "account2": "A2"
+  },
+  "showResetTime": false,
+  "resetTimeThreshold": 80,
+  "cacheTtlMinutes": 5,
+  "cacheRefreshThresholdMinutes": 2
+}

@@ -10,7 +10,7 @@ Display multi-account Claude usage in OMC HUD status bar.
 A1:35% A2:82%(1h20m) A3:4%
 ```
 
-Each account shows its 5-hour usage percentage. Reset countdown appears when usage exceeds the configured threshold (default 80%).
+Each account shows its 5-hour usage percentage. Reset countdown appears when usage exceeds the configured threshold (default 80%) or when the reset window has less than the configured remaining time.
 
 ## Prerequisites
 
@@ -41,7 +41,8 @@ Each account shows its 5-hour usage percentage. Reset countdown appears when usa
      "rateLimitsProvider": {
        "type": "custom",
        "command": "node /path/to/cliproxy-omc-hud/cliproxy-usage.mjs",
-       "timeoutMs": 2000
+       "timeoutMs": 2000,
+      "resetsAtDisplayThresholdPercent": 0
      }
    }
    ```
@@ -73,6 +74,7 @@ Each account shows its 5-hour usage percentage. Reset countdown appears when usa
 | `resetTimeThreshold` | `number`                 | `80`    | When `showResetTime` is `false`, only show reset time for accounts at or above this usage %. |
 | `cacheTtlMinutes`    | `number`                 | `5`     | How long (in minutes) to cache API results before refreshing. |
 | `cacheRefreshThresholdMinutes` | `number`      | `2`     | If another session's cache has less than this many minutes remaining, re-fetch instead of reusing. Helps coordinate multiple Claude Code sessions. |
+| `resetTimeRemainingMinutes` | `number`         | `0`     | Show reset countdown when less than this many minutes remain until the 5-hour window resets, regardless of usage %. `0` = disabled. |
 
 This file is gitignored — it stays local to your machine.
 

@@ -39,12 +39,16 @@ function applyHudConfig(buckets, config) {
   const labels = config.labels ?? {};
   const showResetTime = config.showResetTime === true;
   const resetTimeThreshold = config.resetTimeThreshold ?? 80;
+  const resetTimeRemainingMinutes = config.resetTimeRemainingMinutes ?? 0;
 
   for (const b of filtered) {
     if (labels[b.id]) b.label = labels[b.id];
     if (b.resetsAt && !showResetTime) {
       const pct = b.usage?.type === 'percent' ? b.usage.value : 0;
-      if (pct < resetTimeThreshold) delete b.resetsAt;
+      const showByUsage = pct >= resetTimeThreshold;
+      const remainingMin = (new Date(b.resetsAt) - Date.now()) / 60000;
+      const showByTime = resetTimeRemainingMinutes > 0 && remainingMin <= resetTimeRemainingMinutes;
+      if (!showByUsage && !showByTime) delete b.resetsAt;
     }
   }
 

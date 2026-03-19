@@ -8,5 +8,6 @@
   "showResetTime": false,
   "resetTimeThreshold": 80,
   "cacheTtlMinutes": 5,
-  "cacheRefreshThresholdMinutes": 2
+  "cacheRefreshThresholdMinutes": 2,
+  "resetTimeRemainingMinutes": 0
 }
